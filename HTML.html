@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PESADELO EM CURITIBA - Versão Completa</title>
+    <style>
+        :root {
+            --blood-red: #ff0033;
+            --darkness: #0a0a0a;
+        }
+        
+        body {
+            font-family: 'Bai Jamjuree', sans-serif;
+            background-color: var(--darkness);
+            color: white;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .scene-container {
+            max-width: 100%;
+            padding: 20px;
+        }
+        
+        .scene {
+            display: none;
+        }
+        
+        .scene.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .scene.tense {
+            animation: shake 0.5s infinite;
+        }
+        
+        .scene-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border: 3px solid var(--blood-red);
+            filter: contrast(1.3) brightness(0.7);
+            margin-bottom: 20px;
+        }
+        
+        .scene-text {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-left: 5px solid var(--blood-red);
+            margin-bottom: 25px;
+        }
+        
+        .time-display {
+            color: var(--blood-red);
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .choice-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(255, 0, 51, 0.3);
+            color: white;
+            border: 2px solid var(--blood-red);
+            border-radius: 0;
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .choice-btn:hover {
+            background: rgba(255, 0, 51, 0.5);
+        }
+        
+        .choice-btn.danger {
+            animation: pulse 0.8s infinite alternate;
+            background: rgba(136, 0, 0, 0.5);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0.5deg); }
+            10% { transform: translate(-1px, -2px) rotate(-0.5deg); }
+            20% { transform: translate(-3px, 0px) rotate(0.5deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(0.5deg); }
+            50% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-0.5deg); }
+            80% { transform: translate(-1px, -1px) rotate(0.5deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-0.5deg); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 51, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 0, 51, 0.8); }
+        }
+        
+        .ending {
+            padding: 30px;
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 30px;
+            border: 3px solid;
+        }
+        
+        .bad-ending {
+            border-color: var(--blood-red);
+            background: rgba(136, 0, 0, 0.3);
+        }
+        
+        .good-ending {
+            border-color: #00ff00;
+            background: rgba(0, 136, 0, 0.3);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scene-container">
+        <!-- Cena 0 - Início -->
+        <div class="scene active" id="scene-0">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e9a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Rua deserta à noite">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:47 AM - Rua XV de Novembro</div>
+                <p>O vento gelado corta seu rosto. De repente, o som de uma moto se aproximando. Faróis cegantes iluminam suas costas. Dois homens encapuzados - o passageiro segura algo metálico que brilha sob as luzes da rua.</p>
+            </div>
+            <button class="choice-btn" data-next="1">🏃‍♂️ CORRER para a estação tubo</button>
+            <button class="choice-btn danger" data-next="2">👁️ ENTRAR no beco escuro</button>
+        </div>
+        
+        <!-- Cena 1 - Estação Tubo -->
+        <div class="scene" id="scene-1">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Estação tubo abandonada">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:51 AM - Estação Tubo</div>
+                <p>Você chega ofegante. As portas estão trancadas. A moto para a 10 metros. O passageiro desce - é uma faca de caça. Ele avança lentamente.</p>
+            </div>
+            <button class="choice-btn danger" data-next="3">💢 TENTAR ARROMBAR a porta</button>
+            <button class="choice-btn" data-next="4">👀 CORRER para o shopping</button>
+        </div>
+        
+        <!-- Cena 2 - Beco Escuro (TREME) -->
+        <div class="scene" id="scene-2">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Beco escuro">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:49 AM - Beco da Memória</div>
+                <p>O ar fica mais frio no beco estreito. Você ouve a moto parando na entrada. Passos pesados ecoam atrás de você.</p>
+            </div>
+            <button class="choice-btn" data-next="5">🧗 PULAR A CERCA</button>
+            <button class="choice-btn danger" data-next="6">🚪 ENTRAR na porta estranha</button>
+        </div>
+        
+        <!-- Cena 3 - Porta Quebrada (TREME) -->
+        <div class="scene" id="scene-3">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Homem com faca">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:53 AM - Situação Crítica</div>
+                <p>O vidro não quebra. Seus braços doem. O homem está agora a 3 metros, rindo baixo. A faca reflete a luz dos postes.</p>
+            </div>
+            <button class="choice-btn danger" data-next="7">🗣️ GRITAR por ajuda</button>
+            <button class="choice-btn danger" data-next="8">🥊 TENTAR LUTAR</button>
+        </div>
+        
+        <!-- Cena 4 - Shopping -->
+        <div class="scene" id="scene-4">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Padaria 24h">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:54 AM - Shopping Estação</div>
+                <p>Você avista uma padaria 24h! Dois clientes estão dentro. Os perseguidores freiam bruscamente e fogem ao notar testemunhas.</p>
+            </div>
+            <div class="ending good-ending">
+                ✅ VOCÊ ESCAPOU! ✅
+            </div>
+            <button class="choice-btn" data-next="0">↻ JOGAR NOVAMENTE</button>
+        </div>
+        
+        <!-- Cena 5 - Cerca -->
+        <div class="scene" id="scene-5">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1516912481808-3406841bd33c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Estacionamento vazio">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:50 AM - Estacionamento</div>
+                <p>Você cai no estacionamento vazio. Os perseguidores não te seguem. Você encontra uma saída para a Rua das Flores e consegue fugir!</p>
+            </div>
+            <div class="ending good-ending">
+                ✅ VOCÊ SOBREVIVEU! ✅
+            </div>
+            <button class="choice-btn" data-next="0">↻ JOGAR NOVAMENTE</button>
+        </div>
+        
+        <!-- Cena 6 - Porta Estranha (TREME) -->
+        <div class="scene" id="scene-6">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Casa abandonada">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:50 AM - Local Desconhecido</div>
+                <p>A porta fecha atrás de você com um estrondo. O cheiro de mofo é sufocante. Você ouve a porta sendo trancada por fora. Uma voz rouba sussurra: "Bem-vindo..."</p>
+            </div>
+            <div class="ending bad-ending">
+                🔪 VOCÊ CAIU EM UMA ARMADILHA 🔪
+            </div>
+            <button class="choice-btn" data-next="0">↻ TENTAR NOVAMENTE</button>
+        </div>
+        
+        <!-- Cena 7 - Gritar (TREME) -->
+        <div class="scene" id="scene-7">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Rua deserta">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:55 AM - Fim da Linha</div>
+                <p>Seus gritos ecoam nas ruas vazias. Ninguém responde. O homem com a faca alcança você enquanto o motociclista bloqueia a saída.</p>
+            </div>
+            <div class="ending bad-ending">
+                ☠️ VOCÊ NÃO SOBREVIVEU ☠️
+            </div>
+            <button class="choice-btn" data-next="0">↻ TENTAR NOVAMENTE</button>
+        </div>
+        
+        <!-- Cena 8 - Lutar (TREME) -->
+        <div class="scene" id="scene-8">
+            <img class="scene-img" src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Luta na rua">
+            <div class="scene-text">
+                <div class="time-display">⌚ 03:55 AM - Confronto</div>
+                <p>Você tenta lutar, mas o homem é mais forte. O motociclista se junta ao ataque. A última coisa que você vê é a faca brilhando...</p>
+            </div>
+            <div class="ending bad-ending">
+                💀 FIM VIOLENTO 💀
+            </div>
+            <button class="choice-btn" data-next="0">↻ TENTAR NOVAMENTE</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const choices = document.querySelectorAll('.choice-btn');
+            const tenseScenes = ['scene-2', 'scene-3', 'scene-6', 'scene-7', 'scene-8'];
+            
+            choices.forEach(choice => {
+                choice.addEventListener('click', function() {
+                    // Esconde todas as cenas e remove efeitos
+                    document.querySelectorAll('.scene').forEach(scene => {
+                        scene.classList.remove('active', 'tense');
+                    });
+                    
+                    // Mostra próxima cena
+                    const nextSceneId = 'scene-' + this.getAttribute('data-next');
+                    const nextScene = document.getElementById(nextSceneId);
+                    nextScene.classList.add('active');
+                    
+                    // Adiciona efeito de tremer se for cena de tensão
+                    if(tenseScenes.includes(nextSceneId)) {
+                        nextScene.classList.add('tense');
+                    }
+                    
+                    // Rolagem suave para o topo
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
